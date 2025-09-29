@@ -9,7 +9,6 @@ A TypeScript library for calculating perpetual trading points based on liquidity
 - 🔢 **High Precision Math**: Uses Decimal.js for precise floating-point calculations
 - ⚡ **TypeScript Support**: Full TypeScript support with comprehensive type definitions
 - 🧪 **Well Tested**: Comprehensive unit test coverage
-- 📈 **Configurable Limits**: Support for rate limits and caps on different point types
 - 🌐 **Subgraph Integration**: Built-in GraphQL client for fetching data from The Graph subgraph
 - 🔄 **Automatic Pagination**: Handle large datasets with automatic pagination and rate limiting
 - 📊 **Data Validation**: Comprehensive data validation and transformation utilities
@@ -32,11 +31,8 @@ import { calculateUserPoints, CalculationConfig, TimeContext, PerpLeaderboard } 
 // Define configuration
 const config: CalculationConfig = {
   liquidityRate: new Decimal(1.5),
-  liquidityLimit: new Decimal(10000),
   tradeProfitRate: new Decimal(2.0),
-  tradeProfitLimit: new Decimal(5000),
   tradeRate: new Decimal(1.0),
-  tradeLimit: new Decimal(8000)
 };
 
 // Define time context
@@ -128,7 +124,7 @@ function calculateUserPoints(
 
 **Parameters:**
 - `leaderboards`: Array of user leaderboard data
-- `config`: Calculation configuration with rates and limits
+- `config`: Calculation configuration with rates
 - `timeContext`: Time context providing start and reach timestamps
 - `stopTime`: End timestamp for calculations
 - `overtime`: Whether to handle overtime scenarios
@@ -176,16 +172,13 @@ interface PerpLeaderboard {
 
 #### `CalculationConfig`
 
-Configuration for point calculation rates and limits:
+Configuration for point calculation rates:
 
 ```typescript
 interface CalculationConfig {
   liquidityRate: Decimal;      // Rate for liquidity points
-  liquidityLimit: Decimal;     // Maximum liquidity points
   tradeProfitRate: Decimal;    // Rate for profit points
-  tradeProfitLimit: Decimal;   // Maximum profit points
   tradeRate: Decimal;          // Rate for trade points
-  tradeLimit: Decimal;         // Maximum trade points
 }
 ```
 
@@ -225,7 +218,6 @@ Liquidity points are calculated using time-weighted integration of liquidity pro
 2. **Linear Interpolation**: Average liquidity between start and end snapshots
 3. **Time Weighting**: Multiply average liquidity by time duration
 4. **Rate Application**: Apply the configured liquidity rate
-5. **Limit Enforcement**: Cap at the maximum liquidity limit if configured
 
 ### Trade Points
 
@@ -234,7 +226,6 @@ Trade points are based on trading volume:
 1. **Volume Calculation**: Subtract baseline volume from start snapshots
 2. **Overtime Handling**: Use ended snapshots if user activity exceeds time limits
 3. **Rate Application**: Apply the configured trade rate
-4. **Limit Enforcement**: Cap at the maximum trade limit if configured
 
 ### Profit Points
 
@@ -244,7 +235,6 @@ Profit points are calculated from net trading profits:
 2. **Baseline Adjustment**: Subtract start snapshot profits if available
 3. **Overtime Handling**: Similar to trade points for consistency
 4. **Rate Application**: Apply the configured profit rate
-5. **Limit Enforcement**: Cap at the maximum profit limit if configured
 
 ## Development
 
@@ -289,7 +279,6 @@ The library includes comprehensive unit tests covering:
 
 - ✅ Basic point calculations for all three point types
 - ✅ Liquidity integration with various time scenarios
-- ✅ Limit enforcement and boundary conditions
 - ✅ Overtime handling and edge cases
 - ✅ Multi-user calculations
 - ✅ Negative value handling
@@ -323,7 +312,7 @@ const timeContext = {
 const results = calculateUserPoints(leaderboards, config, timeContext, Date.now(), false);
 ```
 
-### With Limits and Custom Rates
+### With Custom Rates
 
 ```typescript
 const config = {
