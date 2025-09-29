@@ -32,7 +32,7 @@ async function completeExample() {
   console.log(`⏰ Time period: ${new Date(start * 1000).toISOString()} to ${new Date(stop * 1000).toISOString()}`);
 
   try {
-    // Step 3: Fetch data with progress tracking
+    // Step 2: Fetch data with progress tracking
     console.log('\n📦 Fetching data from subgraph...');
     const rawData = await client.fetchWithOptions({
       epochBegin: start,
@@ -50,7 +50,7 @@ async function completeExample() {
 
     console.log(`✅ Successfully fetched ${rawData.length} records\n`);
 
-    // Step 4: Validate the data
+    // Step 3: Validate the data
     console.log('🔍 Validating data...');
     const validation = DataValidator.validateLeaderboards(rawData);
     console.log(`   ✅ Valid records: ${validation.validCount}`);
@@ -66,7 +66,7 @@ async function completeExample() {
       }
     }
 
-    // Step 5: Calculate statistics
+    // Step 4: Calculate statistics
     console.log('\n📊 Data Statistics:');
     const stats = DataStats.calculateStats(rawData);
     console.log(`   👥 Total users: ${stats.totalUsers}`);
@@ -95,12 +95,12 @@ async function completeExample() {
       config,
       start,
       stop,
-      Math.floor(Date.now() / 1000) > stop
+      Math.floor(Date.now() / 1000) > stop, // true when calculating the history points
     );
 
     console.log(`✅ Calculated points for ${pointResults.length} users\n`);
 
-    // Step 11: Display results
+    // Step 5: Display results
     console.log('🏆 Point Calculation Results (Top 10):');
     console.log('='.repeat(120));
     

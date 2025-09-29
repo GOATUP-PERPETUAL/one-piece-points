@@ -99,7 +99,7 @@ export function calculateLiquidityPointBase(
  * @param config 计算配置
  * @param timeContext 时间上下文
  * @param stopTime 结束时间戳
- * @param overtime 结束时间是否超过当前子图最新时间（系统时间）
+ * @param overtime 当前子图最新时间（系统时间）是否超过结束时间
  * @returns 用户点数计算结果
  */
 export function calculateUserPoints(
