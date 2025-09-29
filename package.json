@@ -1,0 +1,41 @@
+{
+  "name": "perp-point-calculator",
+  "version": "1.0.0",
+  "description": "TypeScript library for calculating perpetual trading points based on liquidity and trading metrics",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist",
+    "demo": "tsc && node dist/demo.js",
+    "example:complete": "tsc && node dist/src/subgraph-example.js complete",
+    "example:error": "tsc && node dist/src/subgraph-example.js error"
+  },
+  "keywords": [
+    "typescript",
+    "trading",
+    "perpetual",
+    "points",
+    "liquidity",
+    "calculation"
+  ],
+  "author": "Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.19.17",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.1",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "decimal.js": "^10.4.3",
+    "graphql": "^16.11.0",
+    "graphql-request": "^7.2.0"
+  }
+}
