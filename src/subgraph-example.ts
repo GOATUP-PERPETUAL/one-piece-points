@@ -25,9 +25,9 @@ async function completeExample() {
   });
 
   // Step 2: Define time period (last 7 days)
-  const now = Math.floor(Date.now() / 1000);
-  const start = now - (7 * 24 * 60 * 60);
-  const stop = now;
+  // const now = Math.floor(Date.now() / 1000);
+  const start = 1759129200;
+  const stop = 1759133577;
   
   console.log(`⏰ Time period: ${new Date(start * 1000).toISOString()} to ${new Date(stop * 1000).toISOString()}`);
 
