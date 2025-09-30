@@ -158,6 +158,8 @@ export function calculateUserPoints(
     if (lead.start.length > 0) {
       netProfit = netProfit.sub(lead.start[0].netProfit);
     }
+    // 减去Fees,固定为交易量的0.2%
+    netProfit = netProfit.sub(tradeVolume.times(new Decimal(0.002)));
     
     
     let tradeProfitPoint = new Decimal(0);
