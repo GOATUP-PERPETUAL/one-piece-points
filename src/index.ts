@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js';
+import {json} from "node:stream/consumers";
 
 // 定义数据结构
 export interface PerpLiquiditySnap {
@@ -69,11 +70,6 @@ export function calculateLiquidityPointBase(
 
   const startSnap: PerpLiquiditySnap | null = liquidity.start[0];
   const endSnap = liquidity.ended[0];
-  
-  // 检查时间段有效性
-  if (endSnap.timestamp < startTime) {
-    return new Decimal(0);
-  }
 
   let integral = endSnap.basePoints;
   if (endSnap.timestamp < endTime) {
@@ -135,7 +131,7 @@ export function calculateUserPoints(
 
     // ================== 计算交易点数 ==================
     let tradeVolume = lead.tradingVolume;
-    if (overtime && lead.latestUpdateTimestamp > stopTime && lead.ended.length > 0) {
+    if (overtime && lead.ended.length > 0) {
       tradeVolume = lead.ended[0].tradingVolume;
     }
     
