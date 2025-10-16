@@ -131,6 +131,10 @@ export function calculateUserPoints(
 
     // ================== 计算交易点数 ==================
     let tradeVolume = new Decimal(0);
+    if (lead.latestUpdateTimestamp >= startTime && lead.latestUpdateTimestamp <= stopTime) {
+        tradeVolume = lead.tradingVolume
+    }
+
     if (overtime && lead.ended.length > 0) {
       tradeVolume = lead.ended[0].tradingVolume;
     }
@@ -139,13 +143,15 @@ export function calculateUserPoints(
     if (lead.start.length > 0) {
       tradeVolume = tradeVolume.sub(lead.start[0].tradingVolume);
     }
-    
     const tradePoint = tradeVolume.mul(config.tradeRate); 
     // 确保非负
     result.volume_usd = tradePoint.isNegative() ? new Decimal(0) : tradePoint;
 
     // ================== 计算交易利润点数 ==================
     let netProfit = new Decimal(0);
+    if (lead.latestUpdateTimestamp >= startTime && lead.latestUpdateTimestamp <= stopTime) {
+        netProfit = lead.netProfit
+    }
     if (overtime && lead.ended.length > 0) {
       netProfit = lead.ended[0].netProfit;
     }
