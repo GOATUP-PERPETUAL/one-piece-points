@@ -146,7 +146,7 @@ export function calculateUserPoints(
 
     // ================== 计算交易利润点数 ==================
     let netProfit = lead.netProfit;
-    if (overtime && lead.latestUpdateTimestamp > stopTime && lead.ended.length > 0) {
+    if (overtime && lead.ended.length > 0) {
       netProfit = lead.ended[0].netProfit;
     }
     
