@@ -130,7 +130,7 @@ export function calculateUserPoints(
     }
 
     // ================== 计算交易点数 ==================
-    let tradeVolume = lead.tradingVolume;
+    let tradeVolume = new Decimal(0);
     if (overtime && lead.ended.length > 0) {
       tradeVolume = lead.ended[0].tradingVolume;
     }
