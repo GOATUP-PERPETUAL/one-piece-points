@@ -145,7 +145,7 @@ export function calculateUserPoints(
     result.volume_usd = tradePoint.isNegative() ? new Decimal(0) : tradePoint;
 
     // ================== 计算交易利润点数 ==================
-    let netProfit = lead.netProfit;
+    let netProfit = new Decimal(0);
     if (overtime && lead.ended.length > 0) {
       netProfit = lead.ended[0].netProfit;
     }
