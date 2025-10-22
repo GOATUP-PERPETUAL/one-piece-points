@@ -26,8 +26,8 @@ async function completeExample() {
 
   // Step 2: Define time period (last 7 days)
   // const now = Math.floor(Date.now() / 1000);
-  const start = 1759129200;
-  const stop = 1759133577;
+  const start = 1759075200;
+  const stop = 1759161599;
   
   console.log(`⏰ Time period: ${new Date(start * 1000).toISOString()} to ${new Date(stop * 1000).toISOString()}`);
 
@@ -84,7 +84,7 @@ async function completeExample() {
     const config: CalculationConfig = {
       liquidityRate: new Decimal(0.1).div(new Decimal(3600)),      // 0.1x multiplier per hour for liquidity
       tradeProfitRate: new Decimal(1),    // 1x multiplier for profits  
-      tradeRate: new Decimal(5),         // 5x multiplier for volume (5% of volume)
+      tradeRate: new Decimal(5),         // 5x multiplier for volume
     };
 
     console.log('\n⚙️  Point Calculation Configuration:');

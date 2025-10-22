@@ -131,12 +131,11 @@ export function calculateUserPoints(
 
     // ================== 计算交易点数 ==================
     let tradeVolume = new Decimal(0);
+    if (lead.ended.length > 0) {
+      tradeVolume = lead.ended[0].tradingVolume;
+    }
     if (lead.latestUpdateTimestamp >= startTime && lead.latestUpdateTimestamp <= stopTime) {
         tradeVolume = lead.tradingVolume
-    }
-
-    if (overtime && lead.ended.length > 0) {
-      tradeVolume = lead.ended[0].tradingVolume;
     }
     
     // 处理起始快照
@@ -149,11 +148,11 @@ export function calculateUserPoints(
 
     // ================== 计算交易利润点数 ==================
     let netProfit = new Decimal(0);
+    if (lead.ended.length > 0) {
+      netProfit = lead.ended[0].netProfit;
+    }
     if (lead.latestUpdateTimestamp >= startTime && lead.latestUpdateTimestamp <= stopTime) {
         netProfit = lead.netProfit
-    }
-    if (overtime && lead.ended.length > 0) {
-      netProfit = lead.ended[0].netProfit;
     }
     
     // 处理起始快照
