@@ -31,6 +31,9 @@ async function completeExample() {
   
   console.log(`⏰ Time period: ${new Date(start * 1000).toISOString()} to ${new Date(stop * 1000).toISOString()}`);
 
+  if (start % 3600 !== 0) {
+    throw new Error('start时间必须是小时的第一秒');
+  }
   if (stop % 3600 !== 3599) {
     throw new Error('stop时间必须是小时的最后一秒');
   }
