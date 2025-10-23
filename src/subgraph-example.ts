@@ -26,10 +26,14 @@ async function completeExample() {
 
   // Step 2: Define time period (last 7 days)
   // const now = Math.floor(Date.now() / 1000);
-  const start = 1759075200;
-  const stop = 1759161599;
+  const start = 1759190400;
+  const stop = 1759247999;
   
   console.log(`⏰ Time period: ${new Date(start * 1000).toISOString()} to ${new Date(stop * 1000).toISOString()}`);
+
+  if (stop % 3600 !== 3599) {
+    throw new Error('stop时间必须是小时的最后一秒');
+  }
 
   try {
     // Step 2: Fetch data with progress tracking

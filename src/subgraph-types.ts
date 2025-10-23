@@ -61,7 +61,7 @@ export const LEADERBOARD_QUERY = `
       conditionTradeVolume
       netProfit
       latestUpdateTimestamp
-      start: snap(first: 1, orderBy: timestamp, orderDirection: desc, where: { timestamp_lte: $epochBegin }) {
+      start: snap(first: 1, orderBy: timestamp, orderDirection: desc, where: { timestamp_lt: $epochBegin }) {
         margin
         tradedReferralsCount
         tradingVolume
